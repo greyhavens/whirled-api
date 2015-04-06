@@ -1,32 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.threerings</groupId>
+  <parent>
+    <groupId>com.threerings</groupId>
+    <artifactId>whirled-api-parent</artifactId>
+    <version>1.1-SNAPSHOT</version>
+  </parent>
+
   <artifactId>whirled-code</artifactId>
   <packaging>jar</packaging>
-  <version>1.1-SNAPSHOT</version>
-  <name>whirled-code</name>
-  <description>Support library for the Whirled virtual world.</description>
-  <url>http://www.whirled.com/</url>
-  <issueManagement>
-    <url>http://groups.google.com/group/ooo-libs</url>
-  </issueManagement>
-
-  <scm>
-    <connection>
-      scm:svn:svn+ssh://src.earth.threerings.net/whirled/trunk/projects/whirled/
-    </connection>
-    <developerConnection>
-      scm:svn:svn+ssh://src.earth.threerings.net/whirled/trunk/projects/whirled/
-    </developerConnection>
-  </scm>
-
-  <repositories>
-    <repository>
-      <id>ooo-repo</id>
-      <url>http://build.earth.threerings.net/maven-repository</url>
-    </repository>
-  </repositories>
+  <name>Whirled Java API</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -37,59 +20,51 @@
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <version>r07</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.google.inject</groupId>
       <artifactId>guice</artifactId>
       <version>2.0</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.samskivert</groupId>
       <artifactId>samskivert</artifactId>
       <version>1.1</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.threerings</groupId>
       <artifactId>narya</artifactId>
-      <version>1.3-SNAPSHOT</version>
-      <scope>compile</scope>
+      <version>1.3</version>
     </dependency>
     <dependency>
       <groupId>com.threerings</groupId>
       <artifactId>nenya</artifactId>
-      <version>1.1-SNAPSHOT</version>
-      <scope>compile</scope>
+      <version>1.1</version>
     </dependency>
     <dependency>
       <groupId>com.threerings</groupId>
       <artifactId>vilya</artifactId>
       <version>1.0</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>commons-digester</groupId>
       <artifactId>commons-digester</artifactId>
       <version>2.0</version>
-      <scope>compile</scope>
     </dependency>
 
     <dependency>
       <groupId>com.samskivert</groupId>
       <artifactId>depot</artifactId>
-      <version>1.2-SNAPSHOT</version>
-      <scope>compile</scope>
+      <version>1.2</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.apache.mina</groupId>
       <artifactId>mina-core</artifactId>
       <version>1.1.3</version>
-      <scope>compile</scope>
       <optional>true</optional>
     </dependency>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -103,36 +78,28 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.3.2</version>
+        <version>3.1</version>
         <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
+          <source>1.6</source>
+          <target>1.6</target>
           <fork>true</fork>
           <showDeprecation>true</showDeprecation>
           <showWarnings>true</showWarnings>
-          <compilerArgument>-Xlint" "-Xlint:-serial" "-Xlint:-path</compilerArgument>
+          <compilerArgs>
+            <arg>-Xlint</arg>
+            <arg>-Xlint:-serial</arg>
+            <arg>-Xlint:-path</arg>
+          </compilerArgs>
         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-resources-plugin</artifactId>
-        <version>2.4.3</version>
-        <configuration>
-          <encoding>UTF-8</encoding>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.6</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.7</version>
+        <version>2.9.1</version>
         <configuration>
           <quiet>true</quiet>
           <show>public</show>
+          <additionalparam>-Xdoclint:all -Xdoclint:-missing</additionalparam>
           <links>
             <link>http://www.threerings.net/code/narya/docs/api</link>
           </links>
@@ -140,18 +107,13 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>2.3.1</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-install-plugin</artifactId>
-        <version>2.3.1</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-deploy-plugin</artifactId>
-        <version>2.5</version>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.6</version>
+        <configuration>
+          <includes>
+            <include>com/threerings/**/*Test.java</include>
+          </includes>
+        </configuration>
       </plugin>
     </plugins>
   </build>

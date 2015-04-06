@@ -8,11 +8,11 @@
   <property name="classes.dir"  value="${deploy.dir}/classes"/>
   <property name="tclasses.dir" value="${deploy.dir}/test-classes"/>
 
-  <property name="maven-ant.vers" value="2.1.1"/>
+  <property name="maven-ant.vers" value="2.1.3"/>
   <property name="maven-ant.dir" value="${user.home}/.m2/ant-support"/>
   <property name="maven-ant.jar" value="${maven-ant.dir}/maven-ant-tasks-${maven-ant.vers}.jar"/>
   <property name="maven-ant.url"
-            value="http://mirrors.ibiblio.org/pub/mirrors/apache/maven/binaries"/>
+            value="http://www.apache.org/dyn/closer.cgi/maven/ant-tasks/${maven-ant.vers}/binaries"/>
   <condition property="maven-ant.exists"><available file="${maven-ant.jar}"/></condition>
   <target name="-download-maven-ant" unless="maven-ant.exists">
     <mkdir dir="${maven-ant.dir}"/>
@@ -99,7 +99,7 @@
     activate ActionScript library build.
   </echo></target>
 
-  <target name="aslib" unless="no_rebuild_aslib" depends="-checkaslib,-noteaslib"
+  <target name="aslib" unless="no_rebuild_aslib" depends="-prepare,-checkaslib,-noteaslib"
           description="Builds the ActionScript code">
     <!-- obtain our ActionScript dependencies via Maven -->
     <artifact:pom id="as-pom" file="etc/as-pom.xml"/>
@@ -300,7 +300,7 @@
   </target>
 
   <property name="maven.deploy.repo" value="file://${user.home}/.m2/repository"/>
-  <target name="maven-deploy" depends="dist,tests" 
+  <target name="maven-deploy" depends="dist,tests"
           description="Deploys our build artifacts to a Maven repository.">
     <artifact:deploy file="${deploy.dir}/${ant.project.name}-code.jar" uniqueVersion="false">
       <remoteRepository url="${maven.deploy.repo}"/>

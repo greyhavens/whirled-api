@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.threerings</groupId>
+    <artifactId>whirled-api-parent</artifactId>
+    <version>1.16-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>whirledthanelib</artifactId>
+  <packaging>swc</packaging>
+  <name>Whirled Thane API</name>
+
+  <repositories>
+    <repository>
+      <id>flexmojos</id>
+      <url>http://repository.sonatype.org/content/groups/flexgroup/</url>
+    </repository>
+  </repositories>
+
+  <properties>
+    <flex.version>4.1.0.16076</flex.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.threerings</groupId>
+      <artifactId>whirledlib</artifactId>
+      <version>${project.version}</version>
+      <type>swc</type>
+    </dependency>
+
+    <dependency>
+      <groupId>com.threerings.thane</groupId>
+      <artifactId>thane</artifactId>
+      <version>0.0-SNAPSHOT</version>
+      <type>swc</type>
+    </dependency>
+    <dependency>
+      <groupId>com.threerings.thane</groupId>
+      <artifactId>http</artifactId>
+      <version>0.0-SNAPSHOT</version>
+      <type>swc</type>
+    </dependency>
+
+    <dependency>
+      <groupId>com.adobe.flex.framework</groupId>
+      <artifactId>flex-framework</artifactId>
+      <version>${flex.version}</version>
+      <type>pom</type>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>flexmojos</id>
+      <url>http://repository.sonatype.org/content/groups/flexgroup/</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <build>
+    <sourceDirectory>src/main/as</sourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>org.sonatype.flexmojos</groupId>
+        <artifactId>flexmojos-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <version>4.2-beta</version>
+        <configuration>
+          <omitTraceStatements>false</omitTraceStatements>
+          <debug>true</debug>
+          <incremental>false</incremental>
+          <useNetwork>false</useNetwork>
+          <verboseStacktraces>true</verboseStacktraces>
+          <!-- we've never shown them in the Ant build, why start now? -->
+          <showWarnings>false</showWarnings>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>com.adobe.flex</groupId>
+            <artifactId>compiler</artifactId>
+            <version>${flex.version}</version>
+            <type>pom</type>
+          </dependency>
+          <dependency>
+            <groupId>com.adobe.flex.compiler</groupId>
+            <artifactId>asdoc</artifactId>
+            <version>${flex.version}</version>
+            <classifier>template</classifier>
+            <type>zip</type>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+</project>

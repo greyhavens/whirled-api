@@ -145,6 +145,9 @@
          <path-element>string</path-element>
       </source-path>
       -->
+      <source-path>
+         <path-element>@flex_sdk_dir@/frameworks</path-element>
+      </source-path>
       <!-- compiler.strict: runs the AS3 compiler in strict error checking mode.-->
       <strict>true</strict>
       <!-- compiler.theme: list of CSS or SWC files to apply as a theme-->
@@ -154,6 +157,9 @@
          <filename>string</filename>
       </theme>
       -->
+      <theme>
+        <filename>${flexlib}/themes/Spark/spark.css</filename>
+      </theme>
       <!-- compiler.use-resource-bundle-metadata: determines whether resources bundles are included in the application.-->
       <use-resource-bundle-metadata>true</use-resource-bundle-metadata>
       <!-- compiler.verbose-stacktraces: save callstack information to the SWF for debugging-->
@@ -354,7 +360,7 @@
    <!-- static-link-runtime-shared-libraries: statically link the libraries specified by the -runtime-shared-libraries-path option.-->
    <static-link-runtime-shared-libraries>true</static-link-runtime-shared-libraries>
    <!-- target-player: specifies the version of the player the application is targeting. Features requiring a later version will not be compiled into the application. The minimum value supported is "9.0.0".-->
-   <target-player>10.0.0</target-player>
+   <!-- use default: <target-player>10.0.0</target-player> -->
    <!-- use-network: toggle whether the SWF is flagged for access to network resources-->
    <use-network>true</use-network>
    <!-- verify-digests: verifies the libraries loaded at runtime are the correct ones.-->
